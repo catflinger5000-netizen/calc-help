@@ -117,13 +117,8 @@
 
   footer { margin-top: 32px; padding-block: 16px 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: 16px; }
 
-  #spot {
-    position: absolute;
-    top: 0;
-    right: max(16px, env(safe-area-inset-right, 0px));
-    width: 48px;
-    height: 48px;
-  }
+  .eyebrow { display: flex; align-items: center; }
+  #spot { display: block; width: 140px; height: 36px; margin-block: -8px; }
 
   #gate {
     position: fixed;
@@ -198,7 +193,7 @@
     gap: 8px;
     padding-block: 16px;
   }
-  #dm-room { color: var(--muted); font-size: 13px; font-weight: 400; }
+  #dm-older { align-self: center; }
   #dm-empty { margin: auto; color: var(--muted); }
   .msg { align-self: flex-start; max-width: min(560px, 85%); padding: 8px 12px; background: var(--panel); border: 1px solid var(--line); }
   .msg.mine { align-self: flex-end; background: var(--mine); border-color: transparent; }
@@ -212,7 +207,7 @@
 <body>
 <header class="masthead">
   <div class="wrap">
-    <p class="eyebrow">Unit review</p>
+    <p class="eyebrow"><span>Unit review</span><span id="spot"></span></p>
     <h1>Calc Help</h1>
     <p class="lede">Limits, derivatives and integrals on one page, with worked examples and practice problems.</p>
     <nav aria-label="Sections">
@@ -221,7 +216,6 @@
       <a href="#integrals">Integrals</a>
       <a href="#practice">Practice</a>
     </nav>
-    <div id="spot"></div>
   </div>
 </header>
 
@@ -348,12 +342,12 @@
 
 <div id="dm" hidden>
   <header class="dm-head">
-    <h2>DMs <span id="dm-room"></span></h2>
+    <h2>DMs</h2>
     <input id="dm-name" maxlength="24" placeholder="Your name" aria-label="Your name" spellcheck="false">
     <button type="button" id="dm-lock">Lock</button>
     <button type="button" id="dm-close" aria-label="Close">×</button>
   </header>
-  <div id="dm-log" role="log" aria-live="polite"><p id="dm-empty">No messages yet. Send the first one below.</p></div>
+  <div id="dm-log" role="log" aria-live="polite"><button type="button" id="dm-older" hidden>Load older messages</button><p id="dm-empty">No messages yet. Send the first one below.</p></div>
   <form class="dm-form" id="dm-form">
     <textarea id="dm-text" rows="1" maxlength="1000" placeholder="Message" aria-label="Message"></textarea>
     <button type="submit">Send</button>
@@ -361,6 +355,8 @@
   <p id="dm-status" role="status"></p>
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
